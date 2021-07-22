@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}<title >Listado de Género</title>{% endblock %}
+
+{% block container %}
+
+<header>
+<h1 class="h2 text-center mt-4 mb-5">Listado de Géneros</h1>
+</header>
+<div>
+<a class="btn btn-info" href="{% url 'genre-new' %}">Crear nuevo Género</a>
+</div>
+<br>
+<div class="row justify-content-center">
+        {% for genre in genres %}
+    <div class="peli col-auto text-center">
+            <p class="titulo-peli">{{ genre.name }}</p>
+             <hr>
+            <button class="boton boton-ver">
+                    <a href="{% url 'genre-view' genre.id %}"
+                        class="non-underline-link text-white">
+                    Ver <i class="fas fa-eye"></i>
+                    </a></button>
+                    <button class="boton boton-editar">
+                    <a href="{% url 'genre-detail' genre.id %}"
+                        class="non-underline-link text-white">
+                    Editar <i class="fas fa-edit"></i>
+                    </a></button>
+                    <button class="boton boton-borrar non-underline-link text-white"
+                        custom-href="{% url 'genre-delete' genre.id %}">
+                            Borrar <i class="fas fa-trash-alt"></i>
+                        </button>
+        </div>
+        {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}<title >País detalle</title>{% endblock %}
+
+{% block container %}
+
+  <div class="row">
+            <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    {% if countryObject.id %}
+                    <h1>Editar País {{ countryObject.id }}</h1>
+                    {% else %}
+                    <h1>Crear nuevo País</h1>
+                    {% endif %}
+                    <form action="{% url 'country-save' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <input type="hidden" class="form-control" id="id" name="id" value="{{ countryObject.id }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label id="{{ form.field_name }}" class="form-label">Nombre:</label>
+                            <br>
+                            {{ form.name }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label id="{{ form.field_capital }}" class="form-label">Capital:</label>
+                            <br>
+                            {{ form.capital }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label id="{{ form.field_continent }}" class="form-label">Continente:</label>
+                            <br>
+                            {{ form.continent }}
+                        </div>
+
+                         <div class="mb-3">
+                            <label id="{{ form.field_national_flag }}" class="form-label">Bandera:</label>
+                            <br>
+                            {{ form.national_flag }}
+                            <br />
+                            <img id="imgSalida" width="50%" height="50%" src="" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="flag_url" class="form-label"><b><i><u>Alternativamente, puedes adjuntar la
+                                bandera mediante una URL:</u></i></b></label>
+                            <input class="form-control" type="url" id="flag_url" name="flag_url"
+                                   placeholder="Pega la url de la bandera."  value="{{ CountryForm.flag_url }}">
+                        </div>
+
+                        <div class="mb-3 d-grid gap-2">
+                            <button class="btn btn-primary" type="submit">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-2">
+            <button class="boton boton-ver">
+                    <a href="{% url 'country-list' %}"
+                        class="non-underline-link text-white">
+                    Volver al listado <i class="fas fa-eye"></i>
+                    </a></button>
+            </div>
+        </div>
+
+{% endblock %}

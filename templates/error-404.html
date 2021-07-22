@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}<title >Error 404</title>{% endblock %}
+
+{% block container %}
+
+<div class="alert alert-danger p-5 m-5" role="alert">
+    <p>{{ error }}</p>
+        <a  href="{% url 'index' %}">Volver a Películas</a>
+    </div>
+
+{% endblock %}

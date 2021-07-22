@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}<title >Género detalle</title>{% endblock %}
+
+{% block container %}
+
+<div class="row">
+            <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    {% if genreObject.id %}
+                    <h1>Editar Género {{ genreObject.id }}</h1>
+                    {% else %}
+                    <h1>Crear nuevo Género</h1>
+                    {% endif %}
+                    <form action="{% url 'genre-save' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <input type="hidden" class="form-control" id="id" name="id" value="{{ genreObject.id }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label id="{{ form.field_name }}" class="form-label">Nombre:</label>
+                            <br>
+                            {{ form.name }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label id="{{ form.field_description }}" class="form-label">Descripción:</label>
+                            <br>
+                            {{ form.description }}
+                        </div>
+
+                        <div class="mb-3 d-grid gap-2">
+                            <button class="btn btn-primary" type="submit">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-2">
+                    <button class="boton boton-ver">
+                    <a href="{% url 'genre-list' %}"
+                        class="non-underline-link text-white">
+                    Volver al listado <i class="fas fa-eye"></i>
+                    </a></button>
+                </div>
+        </div>
+
+{% endblock %}

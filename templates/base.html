@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css" integrity="sha512-Ez0cGzNzHR1tYAv56860NLspgUGuQw16GiOOp/I2LuTmpSK9xDXlgJz3XN4cnpXWDmkNBKXR/VDMTCnAaEooxA==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {% block title %}<title>Listado Principal</title>{% endblock %}
+</head>
+<body>
+    <section class="container-fluid">
+        <div class="row">
+            <div class="d-flex justify-content-center bg-dark" style="margin: 0px; padding: 0px;">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">                
+                    <g class="navbar-brand"><img class="logo-movies" src="{% static 'img/logo-movies.png'%}"></g>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            {% with url_name=request.resolver_match.url_name %}
+                            <li class="nav-item">
+                                <a class="nav-link {% if url_name == 'index' or url_name == 'movie_new' or url_name == 'movie_genre_filter' or url_name == 'movie_view' or url_name == 'movie_detail' or url_name == 'movie_save' or url_name == 'movie_load' or url_name == 'movie_delete' %}
+                                active {% endif %}" aria-current="page" href="{% url 'index' %}">Películas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if url_name == 'actor' or url_name == 'actor-create' or url_name == 'actor-save' or url_name == 'actor-update' or url_name == 'actor-delete' or url_name == 'actor-view' %}
+                                active{% endif %}" aria-current="page" href="{% url 'actor' %}">Actores</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if url_name == 'director' or url_name == 'director-create' or url_name == 'director-view' or url_name == 'director-delete' or url_name == 'director-update' or url_name == 'director-save'%}
+                                active{% endif %}" aria-current="page" href="{% url 'director' %}">Directores</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if url_name == 'genre-list' or url_name == 'genre-new' or url_name == 'genre-save' or url_name == 'genre-delete' or url_name == 'genre-detail' or url_name == 'genre-view'%}
+                                active{% endif %}" aria-current="page" href="{% url 'genre-list' %}">Géneros</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if url_name == 'studio-view' or url_name == 'studio-detail' or url_name == 'studio-list' or url_name == 'studio-delete' or url_name == 'studio-new' or url_name == 'studio-save' %}
+                                active{% endif %}" aria-current="page" href="{% url 'studio-list' %}">Estudios</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if url_name == 'country-view' or url_name == 'country-detail' or url_name == 'country-list' or url_name == 'country-delete' or url_name == 'country-new' or url_name == 'country-save' %}
+                                active{% endif %}" aria-current="page" href="{% url 'country-list' %}">Países</a>
+                            </li>
+                             <li class="nav-item">
+                                <a class="nav-link {% if url_name == 'site-list' %}active{% endif %}" aria-current="page" href="{% url 'site-list' %}">Lugares de rodaje</a>
+                            </li>
+                                {% if not user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link {% if url_name == 'login' %}active{% endif %}" href="{% url 'login' %}">Iniciar sesión</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link {% if url_name == 'register' %}active{% endif %}" href="{% url 'register' %}">Registro</a>
+                            </li>
+                                 {% endif %}
+                                 {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link {% if url_name == 'logout' %}active{% endif %}" href="{% url 'logout' %}">Cerrar sesión</a>
+                            </li>
+                                {% endif %}
+                            <li class="nav-item">
+                                 <a class="nav-link" href="/admin">Panel admin</a>
+                            </li>
+                            {% endwith %}
+                        </ul>
+                        </div>
+                </nav>
+            </div>
+        </div>
+    </section>
+    <section class="container">
+        {% block container %}
+        {% endblock %}
+    </section>
+    <footer class="container-fluid bg-dark" style="clear: both;">
+        <div class="row text-center pt-2" >
+            <p class="col-12 text-white">Copyright &copy; <script>document.write(new Date().getFullYear());</script> Grupo 2</p>
+
+        </div>
+        <div class="row footer-social justify-content-center pb-2">
+            <a href="#"><i class="fab fa-facebook fa-2x"></i></a>
+            <a href="#"><i class="fab fa-twitter fa-2x"></i></a>
+            <a href="#"><i class="fab fa-instagram fa-2x"></i></a>
+            <a href="#"><i class="fab fa-youtube fa-2x"></i></a>
+        </div>
+        <div class="row text-center pt-2 pb-2 text-white" >
+            <p>Hecho con &hearts; por: Desarrollos Cósmicos</p>
+        </div>
+    </footer>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.min.js" integrity="sha512-EKWWs1ZcA2ZY9lbLISPz8aGR2+L7JVYqBAYTq5AXgBkSjRSuQEGqWx8R1zAX16KdXPaCjOCaKE8MCpU0wcHlHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>

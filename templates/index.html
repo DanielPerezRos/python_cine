@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}<title >Cartelera de Pel&iacute;culas</title>{% endblock %}
+
+{% block container %}
+
+
+<div class="container">
+        <h1 class="text-center mt-5">Cartelera de películas
+        {% if user.is_authenticated %}
+
+        <a class="btn btn-info mt-3 mb-3" href="{% url 'movie_new' %}"><strong>Crear nueva película</strong></a>
+            <a class="btn btn-secondary mt-3 mb-3" href="{% url 'favourite' %}">Ver Favoritos <i class="fas fa-heart"></i></a>
+
+        {% endif %}
+        </h1>
+</div>
+{% if not user.is_authenticated %}
+<div class="row">
+<h5 class="text-center mt-3 red" >Debes estar <a style="display:inline;" href="{% url 'register' %}">Registrado</a>
+        e <a style="display:inline;" href="{% url 'login' %}">iniciar sesión</a> para activar funcionalidades y opciones de navegación</h5>
+</div>
+{% endif %}
+    <form id="filters" action="{% url 'movie_genre_filter' %}" method="get">
+        {% csrf_token %}
+        <div class="d-flex justify-content-center">
+                <div class="mb-3" style="margin-right:20px;">
+                    <label for="genres">
+                        Filtrar por género:
+                        <select class="form-select" id="genres" name="genres" multiple>
+
+                            {% for genre in genres %}
+                                <option value="{{ genre.id }}" {% if genre in genres_filtered %} selected {% endif %}>
+                                    {{ genre.name }}
+                                </option>
+                            {% endfor %}
+
+                        </select>
+                    </label>
+
+                </div>
+                <div style="margin-top:30px;">
+                    <button class="btn btn-info" type="submit">Aplicar filtro</button>
+                    <a class="btn btn-warning" href="{% url 'index' %}">Limpiar filtro</a>
+                </div>
+        </div>
+    </form>
+<div class="row justify-content-center">
+        {% for movie in movies %}
+    <div class="peli col-auto text-center">
+            <img class="img-fluid" src="{% static 'img/'%}{{ movie.image }}">
+            <p class="titulo-peli">{{ movie.name }}</p>
+            <p class="titulo-peli">{{ movie.date }}</p>
+            <hr>
+
+
+             {% for genre in movie.genres.all %}
+                   <a class="aTexto" href="{% url 'genre-view' id=genre.id %}"><span class="badge bg-primary">{{ genre.name }}</span></a>
+             {% endfor %}
+            <hr>
+
+
+
+            <button class="boton boton-ver">
+                    <a href="{% url 'movie_view' movie.id %}"
+                        class="non-underline-link text-white">
+                    Ver <i class="fas fa-eye"></i>
+                    </a>
+            </button>
+{% if user.is_authenticated %}
+
+            <button class="boton boton-editar">
+                    <a href="{% url 'movie_load' movie.id %}"
+                        class="non-underline-link text-white">
+                    Editar <i class="fas fa-edit"></i>
+                    </a>
+            </button>
+
+            <button class="boton boton-borrar non-underline-link text-white"
+                    custom-href="{% url 'movie_delete' movie.id %}">
+                    Borrar <i class="fas fa-trash-alt"></i>
+            </button>
+{% endif %}
+        </div>
+
+        {% endfor %}
+    {% if not movies|length %}
+        <div class="text-center">No hay elementos actualmente</div>
+    {% endif %}
+</div>
+
+{% endblock %}

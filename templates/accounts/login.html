@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}<title >Cartelera de Pel&iacute;culas</title>{% endblock %}
+
+{% block container %}
+    <header>
+        <h1 class="text-center mt-4 mb-5">Iniciar Sesión</h1>
+    </header>
+
+
+        <div style="height: 300px;">
+            <form class="row justify-content-center mb-5 mt-5" action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                <div class="col-auto">
+                <label for="username" class="visually-hidden">Usuario</label>
+                <input class="form-control" type="text" placeholder="Usuario" name="username" id="username">
+                </div>
+                <div class="col-auto">
+                <label for="password" class="visually-hidden">Contraseña</label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña">
+                </div>
+                <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-3">Confirmar</button>
+                </div>
+            </form>
+        </div>
+
+{% endblock %}

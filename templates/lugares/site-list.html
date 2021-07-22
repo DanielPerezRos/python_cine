@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}<title >Listado Lugares de Rodaje</title>{% endblock %}
+
+{% block container %}
+
+  <header>
+    <h1 class="text-center mt-4 mb-5">LUGARES DE RODAJE</h1>
+  </header>
+   <div>
+  <a type="button" class="btn btn-info" href="#">AÑADIR LUGAR</a>
+  </div>
+   <br>
+    <section class="container">
+
+    <div class="peli">
+      <img class="img-fluid" src="{% static 'img/spain.jpg' %}" alt="Spain">
+      <p class="lugar">España</p>
+      <button class="boton boton-borrar">Borrar <i class="fas fa-trash-alt"></i></button>
+    </div>
+    <div class="peli">
+       <img class="img-fluid" src="{% static 'img/france.jpg' %}" alt="France">
+       <p class="lugar">Francia</p>
+       <button class="boton boton-borrar">Borrar <i class="fas fa-trash-alt"></i></button>
+    </div>
+    <div class="peli">
+       <img class="img-fluid" src="{% static 'img/italy.jpg' %}" alt="Italy">
+       <p class="pais">Italia</p>
+       <button class="boton boton-borrar">Borrar <i class="fas fa-trash-alt"></i></button>
+    </div>
+    <div class="peli">
+       <img class="img-fluid" src="{% static 'img/eeuu.jpg' %}" alt="EEUU">
+       <p class="pais">EE.UU</p>
+       <button class="boton boton-borrar">Borrar <i class="fas fa-trash-alt"></i></button>
+    </div>
+</section>
+
+{% endblock %}

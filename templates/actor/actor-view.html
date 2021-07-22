@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}<title>Datos del actor</title>{% endblock %}
+
+{% block container %}
+    <header>
+        <h1 class="h2 text-center mt-4 mb-5">Información del actor:</h1>
+    </header>
+<div class="row justify-content-center">
+    <div class="persona col-auto text-center">
+        <img class="img-actor-detalle" src="/static/img/{{persona.foto.name}}" alt="{{persona}}">
+        <hr>
+        <p class="titulo-peli">{{ persona }}</p>
+        <p class="titulo-peli">{{ persona.pais }}</p>
+        <p class="titulo-peli">{{ persona.nacimiento }}</p>
+        <hr>
+        <p>{{persona.biografia.texto}}</p>
+        <hr>
+        {% if largo > 0 %}
+            <h4>Lista de películas en las que ha participado ({{largo}} en total):</h4>
+            <ol>
+                {% for peli in pelis %}
+                    <li>{{peli}}</li>
+                {% endfor %}
+            </ol>
+            <hr>
+        {% endif %}
+        <button class="boton boton-ver"><a href="{% url 'actor' %}" class="non-underline-link text-white">Volver al listado <i class="fas fa-eye"></i></a></button>
+        <button class="boton boton-editar"><a href='/cine/modificar_actor/{{persona.id}}/' class="non-underline-link text-white">Editar <i class="fas fa-edit"></i></a></button>
+        <button class="boton boton-borrar non-underline-link text-white" custom-href='/cine/borrar_actor/{{persona.id}}/'>Eliminar <i class="fas fa-trash-alt"></i></button>
+    </div>
+</div>
+<br>
+{% endblock %}

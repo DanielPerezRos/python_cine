@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}<title>Detalle de Pel&iacute;cula</title>{% endblock %}
+
+{% block container %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <h1 class="h2 text-center mt-4 mb-5">Detalle de Pel&iacute;cula</h1>
+        </div>
+        <main class="fondo-peli-detalle mb-5">
+            <div class="d-flex justify-content-center">
+                <div style="margin-left: 20px; margin-right: 20px">
+                    <img class="img-peli-detalle" src="/static/img/{{ movie.image }}" alt="{{ movie.name }}">
+                </div>
+                <div class="datos-peli-detalle">
+                    <h2 class="mt-3"><strong>Título: </strong>{{ movie.name }}
+                        {% if favourite.movie_id == movie.id %}
+                        <span style="color:yellow;">Añadida a Favoritos</span>
+                        {% endif %}
+                        {% if favourite.movie_id != movie.id %}
+                        <span style="color:red;">Borrada de Favoritos</span>
+                        {% endif %}
+                    </h2>
+                    {% if genres|length %}
+                    <p style="color: white; background-color: black;"><strong>Género: </strong>
+                        {% for genre in genres %}
+                            <a class="aTexto" href="{% url 'genre-view' id=genre.id %}"><span class="badge bg-primary">{{ genre.name }}</span></a>
+                        {% endfor %}
+                    </p>
+                    {% endif %}
+                    <p style="color: white; background-color: black;"><strong>Descripción: </strong>
+                        <br>
+                        {{ movie.description }}
+                    </p>
+
+                    <p style="color: white; background-color: black;">
+                        <strong>País: </strong>
+                {% if movie.country_id %}
+                        <a class="aTexto" href="{% url 'country-view' id=movie.country_id %}">
+                            <span class="badge bg-primary">{{ movie.country.name }}</span></a>
+	            {% else %}
+	                <span class="badge bg-secondary ms-3">--</span>
+                {% endif %}
+
+                    </p>
+                    <p style="color: white; background-color: black;"><strong>Director: </strong>
+                            <a class="aTexto" href="{% url 'director-view' clave=movie.director.id %}">
+                                <span class="badge bg-primary">{{ movie.director }}</span></a>
+                    </p>
+                   {% if persons|length %}
+                    <p style="color: white; background-color: black;"><strong>Protagonista/s: </strong>
+                        {% for person in persons %}
+                        <a class="aTexto" href="{% url 'actor-view' clave=person.id %}"><span class="badge bg-primary">{{ person.nombre }} {{ person.apellidos }}</span></a>
+                        {% endfor %}
+                    </p>
+                    {% endif %}
+<!--                    <p style="color: white; background-color: black;"><strong>Director: </strong>Simon McQuoid</p>-->
+                    <p style="color: white; background-color: black;"><strong>Estudio: </strong>
+                {% if movie.studio_id %}
+                        <a class="aTexto" href="{% url 'studio-view' id=movie.studio_id %}" >
+                            <span class="badge bg-primary">{{ movie.studio.name }}</span></a>
+                {% else %}
+	                <span class="badge bg-secondary ms-3">--</span>
+                {% endif %}
+                    </p>
+                    <p style="color: white; background-color: black;"><strong>Coste (€): </strong>{{ movie.cost }}</p>
+                    <p style="color: white; background-color: black;"><strong>Recaudación (€): </strong>{{ movie.income }}</p>
+                    <p style="color: white; background-color: black;"><strong>Fecha: </strong><span class="red">{{ movie.date }}</span></p>
+
+                    <button class="boton boton-ver">
+                    <a href="{% url 'index' %}"
+                        class="non-underline-link text-white">
+                    Volver al listado <i class="fas fa-eye"></i>
+                    </a></button>
+                </div>
+
+            </div>
+        </main>
+      </div>
+
+{% endblock %}

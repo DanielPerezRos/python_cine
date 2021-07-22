@@ -1,0 +1,207 @@
+.img150 {
+  width: 150px;
+}
+
+.non-underline-link {
+  text-decoration: none !important;
+}
+
+.aTexto {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.logo-movies{
+    width: 80px;
+    border: 2px solid white;
+    border-radius: 50%;
+}
+
+.img-laptop{
+    width: 250px;
+}
+
+
+
+/* Estilo para botones: */
+
+.boton{
+    font-size:14px;
+    color: white;
+    padding:5px;
+    border-radius: 10px;
+    line-height: 10px;
+    cursor: pointer;
+    transition: 0.4s;
+    opacity: 0.8;
+}
+
+.boton:hover{
+    opacity: 1;
+}
+.boton-ver{
+    background-color:#0b5ed7;
+    border-color: #0b5ed7;
+}
+.boton-editar{
+    background-color:#157347;
+    border-color: #157347;
+}
+.boton-borrar{
+    background-color:#bb2d3b;
+    border-color: #bb2d3b;
+}
+
+.boton-crear{
+    background-color:#e6b000;
+    border-color: #bb2d3b;
+    padding: 14px;
+    border-radius: 15px;
+
+}
+
+/* Footer */
+.footer-social {
+    text-align: center;
+  }
+
+.footer-social a {
+    width: 40px;
+    display: inline-table;
+    height: 40px;
+    text-align: center;
+    padding-top: 10px;
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+  }
+
+  .fa-facebook:hover, .fa-twitter:hover, .fa-instagram:hover, .fa-youtube:hover {
+    color: #f8b600 !important;
+  }
+
+  .fa-facebook, .fa-twitter, .fa-instagram, .fa-youtube {
+    color: #cccccc !important;
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+  }
+
+  /* DPR Listas personalizadas */
+  .unordered-list-verde li {
+    position: relative;
+    padding-left: 30px;
+    line-height: 1.5em !important;
+    list-style-type: none !important;
+  }
+
+  .unordered-list-verde li:before {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: 3px solid #42b23c;
+    background: #fff;
+    top: 4px;
+    left: 0;
+    border-radius: 50%;
+  }
+
+.peli{
+  width: 25%;
+  border: 1px dashed black;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 25px;
+  text-align: center;
+  float:left;
+}
+
+.peli:hover{
+  border: 1px solid black;
+}
+
+.fondo-peli-detalle{
+    background-image: url('../img/fondo-detalle.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.img-peli-detalle{
+    border: 3px solid white;
+    margin-top: 30px;
+    border-radius: 5px;
+}
+
+.datos-peli-detalle{
+    color: white;
+    background-color: black;
+    opacity: 0.8;
+    padding: 10px;
+}
+
+.persona{
+  border: 1px dashed black;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+}
+
+.img-actor-detalle{
+    width: 250px;
+    height: 250px;
+}
+
+.red {
+    color: red;
+}
+
+@media screen and (max-width: 776px) {
+    .peli{
+        width: 50%;
+        }
+
+}
+@media screen and (max-width: 568px) {
+    .peli{
+        width: 100%;
+        }
+
+}
+
+.numerado, .activar{
+    border: 1px solid #3344FF;
+    padding: 0.5em 0.8em;
+    border-radius: 2px;
+}
+
+a:link, a:visited, a:active {
+    text-decoration:none;
+}
+
+.numerado{
+    color: #B9B9B9;
+}
+
+.numerado:hover {
+    background-color: #44F;
+}
+
+.activar{
+    padding: 0.5em 0.8em;
+    border-radius: 2px;
+    color: #fff;
+    background-color: #00D;
+}
+
+.activar:hover{
+    background-color: #60F;
+}
+
+.limites{
+    max-width: 500px;
+    max-height: 500px;
+}

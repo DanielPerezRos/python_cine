@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}<title >Añdair Lugar</title>{% endblock %}
+
+{% block container %}
+
+<h1 class="text-center mt-4 mb-5">Introduce o edita un nuevo lugar:</h1>
+
+  <div class="container mt-5 mb-5">
+    <form action="introduccion.html" method="post">
+        <p>Pais: <input class="form-control" type="text" name="pais"></p>
+        <p>Ciudad: <input class="form-control" type="text" name="ciudad"></p>
+        <p>Paraje: <input class="form-control" type="text" name="paraje"></p>
+        <p>
+            <input type="submit" value="Enviar">
+            <input type="reset" value="Borrar">
+        </p>
+      </form>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}<title >Crear/Editar Pel&iacute;cula</title>{% endblock %}
+
+{% block container %}
+    <header>
+        {% if movie.id %}
+        <h1 class="text-center mt-4 mb-5">Editar Película</h1>
+        {% else %}
+        <h1 class="text-center mt-4 mb-5">Crear nueva película</h1>
+        {% endif %}
+    </header>
+
+        <div class="row">
+            <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <form action="{% url 'movie_save' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <input type="hidden" required class="form-control" id="id" name="id" value="{{ movie.id }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Título:</label>
+                            <input type="text" required class="form-control" id="name" name="name" value="{{ movie.name }}">
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Descripción</label>
+                            <textarea required class="form-control" id="description" name="description"
+                                      rows="3">{{ movie.description }}</textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_image" class="form-label">Imagen</label>
+                            <input class="form-control" type="file" id="id_image" name="image" value="{{ movie.image }}">
+                            <br />
+                            <img id="imgSalida" width="50%" height="50%" src="" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="image_url" class="form-label"><b><i><u>Alternativamente, puedes adjuntar la imagen
+                                mediante una URL:</u></i></b></label>
+                            <input class="form-control" type="url" id="image_url" name="image_url"
+                                   placeholder="Pega la url de la imagen."  value="{{ ImgUrlForm.image_url }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="cost" class="form-label">Coste (€):</label>
+                            <input  required type="number" class="form-control" id="cost" name="cost" value="{{ movie.cost }}">
+                        </div>
+
+                         <div class="mb-3">
+                            <label for="income" class="form-label">Recaudación (€):</label>
+                            <input  required type="number" class="form-control" id="income" name="income" value="{{ movie.income }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Fecha de estreno:</label>
+                            <input required type="date" class="form-control" id="date" name="date" value="{{ movie.date|date:'Y-m-d' }}">
+                        </div>
+
+                    <div class="mb-3">
+                        <label for="country_id">
+                            Director:
+                            <select class="form-select" id="director" name="director">
+                                {% for director in directors %}
+                                    <option value="{{ director.id }}" {% if movie.director.id == director.id  %} selected {% endif %}>
+                                        {{ director }}
+                                    </option>
+                                {% endfor %}
+
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="persons">
+                            Protagonista/s:
+                            <select class="form-select" id="persons" name="persons" multiple>
+                                {% for person in persons %}
+                                    <option value="{{ person.id }}" {% if person in movie.actors.all %}selected {% endif %}>
+                                        {{ person.nombre }} {{ person.apellidos }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="country_id">
+                            País:
+                            <select class="form-select" id="country_id" name="country_id">
+                                {% for country in countries %}
+                                    <option value="{{ country.id }}" {% if movie.country_id == country.id  %} selected {% endif %}>
+                                        {{ country.name }}
+                                    </option>
+                                {% endfor %}
+
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="genres">
+                            Género/s:
+                            <select class="form-select" id="genres" name="genres" multiple>
+
+                                {% for genre in genres %}
+                                    <option value="{{ genre.id }}" {% if genre in movie.genres.all %} selected {% endif %}>
+                                        {{ genre.name }}
+                                    </option>
+                                {% endfor %}
+
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="studio_id">
+                            Estudio:
+                            <select class="form-select" id="studio_id" name="studio_id">
+                                {% for studio in studios %}
+                                    <option value="{{ studio.id }}" {% if movie.studio_id == studio.id  %} selected {% endif %}>
+                                        {{ studio.name }}
+                                    </option>
+                                {% endfor %}
+
+                            </select>
+                        </label>
+                    </div>
+
+                        <div class="mb-3 d-grid gap-2">
+                            <button class="btn btn-primary" type="submit">Guardar</button>
+                            <a class="btn btn-info" href="{% url 'index' %}">Volver al listado</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-2"></div>
+        </div>
+
+{% endblock %}

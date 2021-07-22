@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}<title >Estudio {{ studio.id }}</title>{% endblock %}
+
+{% block container %}
+
+  <div class="row">
+            <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    {% if studioObject.id %}
+                    <h1>Editar Estudio {{ studioObject.id }}</h1>
+                    {% else %}
+                    <h1>Crear nuevo Estudio</h1>
+                    {% endif %}
+                    <form action="{% url 'studio-save' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <input type="hidden" class="form-control" id="id" name="id" value="{{ studioObject.id }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label id="{{ form.field_name }}" class="form-label">Nombre:</label>
+                            <br>
+                            {{ form.name }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label id="{{ form.field_country_id }}" class="form-label">País:</label>
+                            {{ form.country }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label id="{{ form.field_president }}" class="form-label">Presidente:</label>
+                            <br>
+                            {{ form.president }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label id="{{ form.field_foundation }}" class="form-label">Año fundación:</label>
+                            <br>
+                            {{ form.foundation }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label id="{{ form.field_logo }}" class="form-label">Logo:</label>
+                            <br>
+                            {{ form.logo }}
+                            <br />
+                            <img id="imgSalida" width="50%" height="50%" src="" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="logo_url" class="form-label"><b><i><u>Alternativamente, puedes adjuntar el logo
+                                mediante una URL:</u></i></b></label>
+                            <input class="form-control" type="url" id="logo_url" name="logo_url"
+                                   placeholder="Pega la url del logo."  value="{{ StudioForm.logo_url }}">
+                        </div>
+
+                        <div class="mb-3 d-grid gap-2">
+                            <button class="btn btn-primary" type="submit">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-2">
+                    <button class="boton boton-ver">
+                    <a href="{% url 'studio-list' %}"
+                        class="non-underline-link text-white">
+                    Volver al listado <i class="fas fa-eye"></i>
+                    </a></button>
+                </div>
+        </div>
+
+{% endblock %}

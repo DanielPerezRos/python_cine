@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}<title >País vista</title>{% endblock %}
+
+{% block container %}
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <h1 class="h2 text-center mt-4 mb-5">Vista de País</h1>
+        </div>
+        <header class="mb-5">
+            <div class="d-flex justify-content-center">
+                <div>
+                    <p style="color: black; background-color: silver;"><img style="width: 7em;" class="img-fluid"
+                                                                            src="{% static 'img/'%}{{ country.national_flag }}">
+                        <b>Nombre: </b>{{ country.name }}</p>
+                    <p style="color: black; background-color: silver;"><b>Capital: </b>{{ country.capital }}</p>
+                    <p style="color: black; background-color: silver;"><b>Continente: </b>{{ country.continent }}</p>
+                <hr>
+                    <button class="boton boton-ver">
+                <a href="{% url 'country-list' %}"
+                    class="non-underline-link text-white">
+                Volver al listado <i class="fas fa-eye"></i>
+                </a></button>
+                <button class="boton boton-editar">
+                <a href="{% url 'country-detail' country.id %}"
+                    class="non-underline-link text-white">
+                Editar <i class="fas fa-edit"></i>
+                </a></button>
+                <button class="boton boton-borrar non-underline-link text-white"
+                    custom-href="{% url 'country-delete' country.id %}">
+                        Borrar <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+      </div>
+
+{% endblock %}
