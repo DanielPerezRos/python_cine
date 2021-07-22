@@ -48,6 +48,8 @@
 - Popup de borrado.
 - Frontend y backend de login (plantillas, vistas, modelos, urls).
 - Frontend y backend de registro (plantillas, vistas, modelos, urls).
+- Frontend y backend de filtrado por géneros.
+- Frontend de opciones de menú activas.
 
 ### Daniel Pareja
 
